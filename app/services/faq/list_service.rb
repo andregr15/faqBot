@@ -27,7 +27,7 @@ module FaqModule
         response += "*#{f.question}*\n"
         response += ">#{f.answer}\n"
         f.hashtags.each do |h|
-          response += "_##{h.name}_"
+          response += "_##{h.name}_ "
         end
         response += "\n\n"
       end
