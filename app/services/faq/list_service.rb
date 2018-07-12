@@ -21,7 +21,7 @@ module FaqModule
       faqs = @company.faqs
     end
 
-      response = '*Perguntas e Respostas*\n\n'
+      response = "*Perguntas e Respostas*\n\n"
       faqs.each do |f|
         response += "*#{f.id}* - "
         response += "*#{f.question}*\n"
@@ -29,7 +29,7 @@ module FaqModule
         f.hashtags.each do |h|
           response += "_##{h.name}_"
         end
-        response += '\n\n'
+        response += "\n\n"
       end
     (faqs.count > 0) ? response : 'Nada encontrado'
     end
