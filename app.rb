@@ -22,6 +22,7 @@ class App < Sinatra::Base
       response = InterpretService.call(result['action'], result['parameters'])
     end
 
-    json({:fulfillmentText=>response}, :enconder => :to_json, :content_type => :js)
+    content_type :json 
+    {:fulfillmentText => response }.to_json
   end
 end
