@@ -6,7 +6,7 @@ describe FaqModule::CreateService do
 
     @question = FFaker::Lorem.sentence
     @answer = FFaker::Lorem.sentence
-    @hashtags = "#{FFaker:Lorem.word}, #{FFaker::Lorem.word}"
+    @hashtags = "#{FFaker::Lorem.word}, #{FFaker::Lorem.word}"
   end
 
   describe '#call' do
@@ -24,7 +24,7 @@ describe FaqModule::CreateService do
 
       it 'should return the message of created with success' do
         #expect(@response).to match('created with success')
-        expect(@response).to match('criado com sucesso')
+        expect(@response).to match('Criado com sucesso')
       end
 
       it 'should find question and answer in database' do

@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'pg'
+gem 'pg_search'
 gem 'rake'
 
 group :development do

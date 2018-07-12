@@ -1,7 +1,7 @@
 require_relative './../spec_helper.rb'
 
 describe HelpService do
-  descrive '#call' do
+  describe '#call' do
     it 'should return a list of main commands' do
       response = HelpService.call
       

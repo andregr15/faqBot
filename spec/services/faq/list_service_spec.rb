@@ -34,7 +34,7 @@ describe FaqModule::ListService do
 
     context 'using search command' do
       it 'should return message of nothing found when an empty query is used' do
-        service = FaqModule::ListService.new({ query: '' }, 'search')
+        service = FaqModule::ListService.new({ 'query' => '' }, 'search')
 
         response = service.call
         #expect(response).to match('nothing found')
@@ -43,7 +43,7 @@ describe FaqModule::ListService do
 
       it 'should return questions and answers when a valid query is used' do
         faq = create(:faq, company: @company)
-        service = FaqModule::ListService.new({ query: faq.question.split(' ').sample}, 'search')
+        service = FaqModule::ListService.new({ 'query' => faq.question.split(' ').sample}, 'search')
 
         response = service.call
 
@@ -54,7 +54,7 @@ describe FaqModule::ListService do
 
     context 'using search_by_hashtag command' do
       it 'should return message of nothing found when an empty query is used' do
-        service = FaqModule::ListService.new({ query: '' }, 'search_by_hashtag')
+        service = FaqModule::ListService.new({ 'query' => '' }, 'search_by_hashtag')
         
         response = service.call
         #expect(response).to match('nothing found')
@@ -63,10 +63,10 @@ describe FaqModule::ListService do
 
       it 'should return question and answers when a valid query is used' do
         faq = create(:faq, company: @company)
-        hastag = create(:hashtag, company: @company)
+        hashtag = create(:hashtag, company: @company)
         create(:faq_hashtag, faq: faq, hashtag: hashtag)
 
-        service = FaqModule::ListService.new({ query: hashtag.name }, 'search_by_hashtag')
+        service = FaqModule::ListService.new({ 'query' => hashtag.name }, 'search_by_hashtag')
 
         response = service.call
 

@@ -9,7 +9,7 @@ describe FaqModule::RemoveService do
     context 'with a valid ID' do
       before :each do 
         faq = create(:faq, company: @company)
-        service = FaqModule::RemoveService.new({ id: faq.id })
+        service = FaqModule::RemoveService.new({ 'id' => faq.id })
         @response = service.call
       end
 
@@ -25,11 +25,11 @@ describe FaqModule::RemoveService do
 
     context 'with an invalid ID' do
       it 'should return the message of invalid id' do
-        service = FaqModule::RemoveService.new({ id: rand(1..9999) })
+        service = FaqModule::RemoveService.new({ 'id' => rand(1..9999) })
         response = service.call
         
-        #expect(response).to match('invalid id')
-        expect(response).to match('Questão inválida, verifique o id')
+        #expect(response).to match('invalid ID')
+        expect(response).to match('Questão inválida, verifique o ID')
       end
     end
 
