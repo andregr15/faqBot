@@ -9,6 +9,8 @@ class InterpretService
       FaqModule::RemoveService.new(params).call
     when 'help'
       HelpService.call
+    when 'quote'
+      QuoteService.call
     else
       'Não compreendi o seu desejo'
     end
