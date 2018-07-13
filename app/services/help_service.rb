@@ -14,6 +14,6 @@ class HelpService
     response += "*Perguntas e Respostas*\n"
     response += ">Mostra a lista de perguntas e respostas\n\n"
     response += "*Citações*\n"
-    response += ">Mostra citações inspiradoras"
+    response += ">Mostra citações"
   end
 end
