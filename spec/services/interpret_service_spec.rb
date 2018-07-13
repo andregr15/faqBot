@@ -133,5 +133,12 @@ describe InterpretService do
     end
 
   end
+
+  describe '#quote' do
+    it 'should return a quote' do
+      response = InterpretService.call('quote', { })
+      expect(response).to match('Autor')
+    end
+  end
   
 end
