@@ -2,7 +2,7 @@ require_relative '../spec_helper.rb'
 
 describe QuoteService do
   it 'should return a quote' do
-    quote = QuoteService::quote
+    quote = QuoteService::call
     expect(quote).to be_kind_of(String)
   end
 end
