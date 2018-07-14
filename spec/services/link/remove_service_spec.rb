@@ -7,7 +7,10 @@ describe LinkModule::RemoveService do
   describe '#call' do
     context 'With a valid ID' do
       before :each do
+        @hashtag = create(:hashtag, company: @company)
         link = create(:link, company: @company)
+        create(:category_link, hashtag: @hashtag, categorizable: link)
+
         service = LinkModule::RemoveService.new({ 'id' => link.id })
         @response = service.call
       end
@@ -18,6 +21,10 @@ describe LinkModule::RemoveService do
 
       it 'should have removed the link from database' do
         expect(Link.all.count).to eq(0)
+      end
+
+      it 'should have removed the hashtag from database' do
+        expect(Hashtag.all.count).to eq(0)
       end
 
     end

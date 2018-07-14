@@ -5,6 +5,5 @@ class Hashtag < ActiveRecord::Base
   belongs_to :company
 
   has_many :categories
-  has_many :categorizables, through: :categories
-  has_many :links, through: :categories, source: 'Link'
+  has_many :links, through: :categories, source: :categorizable, source_type: 'Link'
 end
