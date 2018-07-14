@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_122911) do
+ActiveRecord::Schema.define(version: 2018_07_14_002636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.integer "categorizable_id"
+    t.string "categorizable_type"
+    t.integer "hashtag_id"
+    t.index ["categorizable_type", "categorizable_id"], name: "index_categories_on_categorizable_type_and_categorizable_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -33,6 +40,12 @@ ActiveRecord::Schema.define(version: 2018_07_07_122911) do
   create_table "hashtags", force: :cascade do |t|
     t.string "name"
     t.integer "company_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "url"
   end
 
 end
