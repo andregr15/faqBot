@@ -8,7 +8,9 @@ describe FaqModule::RemoveService do
   describe '#call' do
     context 'with a valid ID' do
       before :each do 
+        hashtag = create(:hashtag, company: @company)
         faq = create(:faq, company: @company)
+        create(:category_faq, hashtag: hashtag, categorizable: faq)
         service = FaqModule::RemoveService.new({ 'id' => faq.id })
         @response = service.call
       end
@@ -18,9 +20,14 @@ describe FaqModule::RemoveService do
         expect(@response).to match('Removido com sucesso')
       end
 
-      it 'should remove the Faq' do
+      it 'should remove the Faq from the database' do
         expect(Faq.all.count).to eq(0)
       end
+
+      it 'should remove the hashtag from the database' do
+        expect(Hashtag.all.count).to eq(0)
+      end
+      
     end
 
     context 'with an invalid ID' do

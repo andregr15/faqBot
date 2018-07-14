@@ -14,7 +14,7 @@ module FaqModule
       Faq.transaction do
         # Deleta as tags associadas que não estejam associadas a outros faqs
         faq.hashtags.each do |h|
-          if h.faqs.count <= 1
+          if h.faqs.count <= 1 && h.links.count == 0
             h.delete
           end
         end

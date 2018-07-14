@@ -64,7 +64,7 @@ describe FaqModule::ListService do
       it 'should return question and answers when a valid query is used' do
         faq = create(:faq, company: @company)
         hashtag = create(:hashtag, company: @company)
-        create(:faq_hashtag, faq: faq, hashtag: hashtag)
+        create(:category_faq, hashtag: hashtag, categorizable: faq)
 
         service = FaqModule::ListService.new({ 'query' => hashtag.name }, 'search_by_hashtag')
 
