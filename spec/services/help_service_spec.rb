@@ -19,6 +19,10 @@ describe HelpService do
       expect(response).to match('Pesquise a hashtag X')
       expect(response).to match('Perguntas e Respostas')
       expect(response).to match('Citações')
+      expect(response).to match('Adicione um Link')
+      expect(response).to match('O que você sabe sobre o Link X')
+      expect(response).to match('Pesquisa o Link pela hashtag X')
+      expect(response).to match('Remova o Link ID')
     end
   end
 end
