@@ -22,12 +22,12 @@ describe LinkModule::ListService do
         response = @service.call
         
         expect(link1.name).to match(Link.first.name)
-        expect(link1.description).to match(Link.first.name)
-        expect(link1.url).to match(Link.first.name)
+        expect(link1.description).to match(Link.first.description)
+        expect(link1.url).to match(Link.first.url)
 
         expect(link2.name).to match(Link.last.name)
         expect(link2.description).to match(Link.last.description)
-        exepct(link2.url).to match(Link.last.url)
+        expect(link2.url).to match(Link.last.url)
       end
     end
 
@@ -41,16 +41,16 @@ describe LinkModule::ListService do
 
       it 'should return the links when used a valid query' do
         link = create(:link, company: @company)
-
+        
         service = LinkModule::ListService.new({
-          'query' => link.description.split('').sample
+          'query' => link.description.split(' ').sample
         }, 'search')
 
         response = service.call
         
-        expect(link.name).to match(response)
-        expect(link.description).to match(response)
-        expect(link.url).to match(response)
+        expect(response).to match(link.name)
+        expect(response).to match(link.description)
+        expect(response).to match(link.url)
       end
     end
 
@@ -63,18 +63,18 @@ describe LinkModule::ListService do
       end
 
       it 'should return the links when used a valid query' do
-        hashtag = create(:hashtag)
+        hashtag = create(:hashtag, company: @company)
         link = create(:link, company: @company)
-        link.hashtags << hashtag
+        create(:category_link, hashtag: hashtag, categorizable: link)
 
-        service = LinkModule::ListService.new({ 'query' => 'hashtag' }, 'search_by_hashtag')
+        service = LinkModule::ListService.new({ 'query' => hashtag.name }, 'search_by_hashtag')
 
         response = service.call
         
-        expect(link.name).to match(response)
-        expect(link.description).to match(response)
-        expect(link.url).to match(response)
-        expect(hashtag.name).to match(response)
+        expect(response).to match(link.name)
+        expect(response).to match(link.description)
+        expect(response).to match(link.url)
+        expect(response).to match(hashtag.name)
       end
     end
   end
