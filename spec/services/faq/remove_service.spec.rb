@@ -38,7 +38,7 @@ describe FaqModule::RemoveService do
           @service = FaqModule::RemoveService.new({ 'id' => faq1.id })
         end
 
-        it 'should not remove the hashtag from the database when the hashtag is related to more than one faq' do
+        it 'when the hashtag is related to more than one faq' do
           faq2 = create(:faq, company: @company)
           create(:category_faq, hashtag: @hashtag, categorizable: faq2)
 
@@ -49,7 +49,7 @@ describe FaqModule::RemoveService do
           expect(Hashtag.first.name).to eql(@hashtag.name)
         end
 
-        it 'should not remove the hashtag from the database when the hashtag is related to at least one faq and at least one link' do
+        it 'when the hashtag is related to at least one faq and at least one link' do
           link = create(:link, company: @company)
           create(:category_link, hashtag: @hashtag, categorizable: link)
 
