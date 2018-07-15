@@ -184,19 +184,18 @@ describe InterpretService do
     end
 
     it 'should return the link when a valid query is used' do
-      response = InterpretService.call('search_links', { 'query' => @link.name.split(' ').sample })
-      
       link = create(:link, company: @company)
+      response = InterpretService.call('search_links', { 'query' => link.name.split(' ').sample })
 
-      expect(response).to match(@link.name)
-      expect(response).to match(@link.description)
-      expect(response).to match(@link.url)
+      expect(response).to match(link.name)
+      expect(response).to match(link.description)
+      expect(response).to match(link.url)
     end
   end
 
   describe '#search_by_hashtags_links' do
     it 'should return the message of nothing found when an empty query is used' do
-      response = InterpretService.call('search_by_hashtags_links', { 'query' => '' })
+      response = InterpretService.call('search_by_hashtag_links', { 'query' => '' })
       expect(response).to eql('Nada encontrado')
     end
 
@@ -208,7 +207,7 @@ describe InterpretService do
       create(:category_link, hashtag: hashtag, categorizable: link)
       create(:category_link, hashtag: hashtag, categorizable: link2)
 
-      response = InterpretService.call('search_by_hashtags_links', { 'query' => hashtag.name })
+      response = InterpretService.call('search_by_hashtag_links', { 'query' => hashtag.name })
 
       expect(response).to match(link.name)
       expect(response).to match(link.description)
@@ -229,7 +228,7 @@ describe InterpretService do
       @url = FFaker::Internet.http_url
     end
     
-    it 'should return message of missing hashtag when no hashtag params is used' do
+    it 'should return the message of missing hashtags when no hashtags params is used' do
       response = InterpretService.call('create_links', {
         'name-original' => @name,
         'description-original' => @description,
@@ -250,7 +249,7 @@ describe InterpretService do
         })
       end
 
-      it 'should have created the link in the database' do
+      it 'should return the message of created with success' do
         expect(@response).to eql('Criado com sucesso')
       end
 
@@ -265,9 +264,9 @@ describe InterpretService do
         expect(@hashtags.split(/[\s,]+/).last).to eql(Hashtag.last.name)
       end
 
-      it 'should have created the relashionship between link and hashtag in the database' do
+      it 'should have created the relationship between link and hashtag in the database' do
         expect(@hashtags.split(/[\s,]+/).first).to eql(Link.first.hashtags.first.name)
-        exepct(@hashtags.split(/[\s,]+/).last).to eql(Link.first.hashtags.last.name)
+        expect(@hashtags.split(/[\s,]+/).last).to eql(Link.first.hashtags.last.name)
       end
     end
 
@@ -282,7 +281,7 @@ describe InterpretService do
     context 'when a valid id is used' do
       before :each do
         link = create(:link, company: @company)
-        @response = InterpertService.call('remove_links', { 'id'=> link.id })
+        @response = InterpretService.call('remove_links', { 'id'=> link.id })
       end
 
       it 'should return the message of removed with success' do
