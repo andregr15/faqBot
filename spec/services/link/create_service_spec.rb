@@ -13,10 +13,10 @@ describe LinkModule::CreateService do
     context 'With hashtags parameter' do
       before :each do
         service = LinkModule::CreateService.new({
-          'name' => @name,
-          'description' => @description,
-          'url' => @url,
-          'hashtags' => @hashtags
+          'name-original' => @name,
+          'description-original' => @description,
+          'url-original' => @url,
+          'hashtags-original' => @hashtags
         })
         @response = service.call
       end
@@ -40,9 +40,9 @@ describe LinkModule::CreateService do
     context 'Without hashtags parameter' do
       it 'should return message of hashtag is missing' do
         service = LinkModule::CreateService.new({
-          'name' => @name,
-          'description' => @description,
-          'url' => @url
+          'name-original' => @name,
+          'description-original' => @description,
+          'url-original' => @url
         })
         response = service.call
         expect(response).to eql('Hashtag obrigatória')

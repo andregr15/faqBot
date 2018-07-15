@@ -2,10 +2,10 @@ module LinkModule
   class CreateService
     def initialize(params)
       @company = Company.last
-      @name = params['name']
-      @description = params['description']
-      @url = params['url']
-      @hashtags = params['hashtags']
+      @name = params['name-original']
+      @description = params['description-original']
+      @url = params['url-original']
+      @hashtags = params['hashtags-original']
     end
 
     def call
